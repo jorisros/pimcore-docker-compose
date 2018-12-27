@@ -7,5 +7,4 @@ printf "Create the .docker/php directory\n"
 mkdir -p .docker/php
 printf "Download php-ini-overrides.ini\n"
 curl https://raw.githubusercontent.com/jorisros/pimcore-docker-compose/master/.docker/php/php-ini-overrides.ini --output .docker/php/php-ini-overrides.ini
-printf "Cleanup.\n"
-rm install-docker-compose.sh
+

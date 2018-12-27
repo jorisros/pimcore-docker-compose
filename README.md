@@ -7,7 +7,7 @@ Checkout project or [install](https://pimcore.com/docs/5.x/Development_Documenta
 When you want to do a ``composer install`` the local environment dont have the right dependencies. So you have to do a composer install as followed:
 
 ```
-composer install --ignore-platform-reqs --no-scripts
+COMPOSER_MEMORY_LIMIT=4G composer install --ignore-platform-reqs --no-scripts
 ```
 
 Go into the project directory and run the following command:

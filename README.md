@@ -2,7 +2,13 @@
 
 This is a modification of the docker-compose of @dpfaffenbauer. It fits better for the project setup we normally do.
 
-Checkout project or [install](https://pimcore.com/docs/5.x/Development_Documentation/Getting_Started/Installation.html) a new project. 
+Checkout project or [install](https://pimcore.com/docs/5.x/Development_Documentation/Getting_Started/Installation.html) a new project.
+
+When you want to do a ``composer install`` the local environment dont have the right dependencies. So you have to do a composer install as followed:
+
+```
+composer install --ignore-platform-reqs --no-scripts
+```
 
 Go into the project directory and run the following command:
 ```bash

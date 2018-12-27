@@ -8,7 +8,7 @@ services:
     working_dir: /application
     command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --innodb_file_format=Barracuda, --innodb_large_prefix=1, --innodb_file_per_table=1]
     ports:
-      - 3307:3306
+      - 127.0.0.1:3307:3306
     volumes:
       - pimcore-database:/var/lib/mysql
     environment:
@@ -21,15 +21,15 @@ services:
     image: adminer
     restart: always
     ports:
-      - 2002:8080
+      - 127.0.0.1:2002:8080
 
   php:
     image: dpfaffenbauer/pimcore:PHP7.2-apache
     volumes:
       - .:/var/www/html:cached
     ports:
-     - "2000:80"
-     - "2001:443"
+     - "127.0.0.1:2000:80"
+     - "127.0.0.1:2001:443"
     links:
      - db:db
      - redis:redis
@@ -39,7 +39,7 @@ services:
     volumes:
       - .:/var/www/html:cached
     ports:
-     - "2006:80"
+     - "127.0.0.1:2006:80"
     links:
      - db:db
      - redis:redis

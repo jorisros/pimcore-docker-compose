@@ -3,11 +3,14 @@
 This is a modification of the docker-compose of @dpfaffenbauer. It fits better for the project setup we normally do.
 
 Checkout project or [install](https://pimcore.com/docs/5.x/Development_Documentation/Getting_Started/Installation.html) a new project.
+```
+COMPOSER_MEMORY_LIMIT=-1 composer create-project --ignore-platform-reqs pimcore/skeleton pimcore-skeleton 
+```
 
 When you want to do a ``composer install`` the local environment dont have the right dependencies. So you have to do a composer install as followed:
 
 ```
-COMPOSER_MEMORY_LIMIT=4G composer install --ignore-platform-reqs --no-scripts
+COMPOSER_MEMORY_LIMIT=-1 composer install --ignore-platform-reqs --no-scripts
 ```
 
 Go into the project directory and run the following command:

@@ -45,8 +45,6 @@ services:
      - redis:redis
     environment:
       - PHP_IDE_CONFIG="serverName=localhost"
-    command: 
-      - chown -R www-data: .
 
 volumes:
   pimcore-database:

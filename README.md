@@ -1,6 +1,6 @@
 # Pimcore docker compose
 
-This is a modification of the docker-compose of @dpfaffenbauer. It fits better for the project setup we normally do.
+This is a implementation of the provided docker image of Pimcore. It fits better for the project setup I normally do.
 
 Create a new project as followed.
 ```

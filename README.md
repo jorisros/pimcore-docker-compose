@@ -2,29 +2,26 @@
 
 This is a modification of the docker-compose of @dpfaffenbauer. It fits better for the project setup we normally do.
 
-Checkout project or [install](https://pimcore.com/docs/5.x/Development_Documentation/Getting_Started/Installation.html) a new project.
+Create a new project as followed.
 ```
-COMPOSER_MEMORY_LIMIT=-1 composer create-project --ignore-platform-reqs pimcore/skeleton pimcore-skeleton 
-```
-
-When you want to do a ``composer install`` the local environment dont have the right dependencies. So you have to do a composer install as followed:
-
-```
-COMPOSER_MEMORY_LIMIT=-1 composer install --ignore-platform-reqs --no-scripts
+composer create-project --ignore-platform-reqs pimcore/skeleton pimcore-skeleton 
 ```
 
-Go into the project directory and run the following command:
+Go into the project directory and run the following command, that download the preconfigured ``docker-compose.yml`` from this repository:
+
 ```bash
 curl -sL https://git.io/fhkYZ | bash -s
 ```
-Now spin off the docker instance by the following commad
+Now spin off the docker instances by the following commad
 ```bash
 docker-compose up -d
 ```
+
 After this when it is a new project run after when docker is up, run the pimcore installer.
 ```bash
-docker-compose exec php vendor/bin/pimcore-install --mysql-host-socket=db
+docker-compose exec web vendor/bin/pimcore-install --mysql-host-socket=db
 ```
+
 When a it is a existing project make sure that the ``system.php`` has the following settings for the database.
 ```php
 "database" => [
@@ -39,9 +36,9 @@ When a it is a existing project make sure that the ``system.php`` has the follow
 ```
 Access then the install as followed:
 
-[Pimcore normal version](http://localhost:2000)
+[Pimcore normal version](http://localhost:8000)
 
-[Pimcore debug version](http://localhost:2006)
+[Pimcore debug version](http://localhost:8080)
 
 [Adminer](http://localhost:2002)
 

@@ -1,9 +1,34 @@
 version: '2.0'
 services:
+  cli:
+    image: pimcore/pimcore:PHP7.4-cli
+    volumes:
+      - .:/var/www/html:cached
+
+  web:
+    image: pimcore/pimcore:PHP7.4-apache
+    ports:
+      - 127.0.0.1:8000:80
+    volumes:
+      - .:/var/www/html:cached
+    links:
+      - database:database
+      - redis:redis
+  
+  web-debug:
+    image: pimcore/pimcore:PHP7.4-apache-debug
+    ports:
+      - 127.0.0.1:8080:80
+    volumes:
+      - .:/var/www/html:cached
+    links:
+      - database:database
+      - redis:redis
+
   redis:
     image: redis:alpine
 
-  db:
+  database:
     image: mariadb:10.1
     working_dir: /application
     command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --innodb_file_format=Barracuda, --innodb_large_prefix=1, --innodb_file_per_table=1]
@@ -16,34 +41,11 @@ services:
       - MYSQL_DATABASE=pimcore
       - MYSQL_USER=pimcore
       - MYSQL_PASSWORD=pimcore
-
+  
   adminer:
     image: adminer
     ports:
       - 127.0.0.1:2002:8080
-
-  php:
-    image: dpfaffenbauer/pimcore:PHP7.2-apache
-    volumes:
-      - .:/var/www/html:cached
-    ports:
-     - "127.0.0.1:2000:80"
-     - "127.0.0.1:2001:443"
-    links:
-     - db:db
-     - redis:redis
-
-  php-debug:
-    image: dpfaffenbauer/pimcore:PHP7.2-apache-debug
-    volumes:
-      - .:/var/www/html:cached
-    ports:
-     - "127.0.0.1:2006:80"
-    links:
-     - db:db
-     - redis:redis
-    environment:
-      - PHP_IDE_CONFIG="serverName=localhost"
 
 volumes:
   pimcore-database:

@@ -19,7 +19,7 @@ docker-compose up -d
 
 After this when it is a new project run after when docker is up, run the pimcore installer.
 ```bash
-docker-compose exec web vendor/bin/pimcore-install --mysql-host-socket=db
+docker-compose exec web vendor/bin/pimcore-install --mysql-host-socket=database
 ```
 
 When a it is a existing project make sure that the ``system.php`` has the following settings for the database.
@@ -29,7 +29,7 @@ When a it is a existing project make sure that the ``system.php`` has the follow
         "username" => "pimcore",
         "password" => "pimcore",
         "dbname" => "pimcore",
-        "host" => "db",
+        "host" => "database",
         "port" => 3306
     ]
 ],

@@ -34,6 +34,11 @@ When a it is a existing project make sure that the ``system.php`` has the follow
     ]
 ],
 ```
+Then we have to correct the userrights to the apache user. So we will run the following command:
+```
+docker-compose exec web chown -R www-data ./
+```
+
 Access then the install as followed:
 
 [Pimcore normal version](http://localhost:8000)

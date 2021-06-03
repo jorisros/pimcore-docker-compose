@@ -4,7 +4,7 @@ This is a implementation of the provided docker image of Pimcore. It fits better
 
 Create a new project as followed.
 ```
-docker run composer create-project --ignore-platform-reqs pimcore/skeleton pimcore-skeleton 
+docker run --rm -v $(pwd):/app composer create-project  --ignore-platform-reqs pimcore/skeleton pimcore-skeleton
 ```
 
 Go into the project directory and run the following command, that download the preconfigured ``docker-compose.yml`` from this repository:

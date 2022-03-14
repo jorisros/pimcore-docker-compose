@@ -1,0 +1,53 @@
+
+version: '2.0'
+services:
+  redis:
+    image: redis:alpine
+
+  db:
+    image: mariadb:10.4
+    working_dir: /application
+    command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --innodb-file-format=Barracuda, --innodb-large-prefix=1, --innodb-file-per-table=1]
+    volumes:
+      - pimcore-database:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=ROOT
+      - MYSQL_DATABASE=pimcore
+      - MYSQL_USER=pimcore
+      - MYSQL_PASSWORD=pimcore
+
+  adminer:
+    image: dockette/adminer
+    ports:
+      - 2002:80
+    environment:
+      - UPLOAD=4096M
+
+  php:
+    image: dpfaffenbauer/pimcore:PHP7.1-apache
+    volumes:
+      - .:/var/www/html:cached
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+    ports:
+      - "2000:80"
+      - "2001:443"
+    links:
+      - db:db
+      - redis:redis
+
+  php-debug:
+    image: dpfaffenbauer/pimcore:PHP7.1-apache-debug
+    volumes:
+      - .:/var/www/html:cached
+    ports:
+      - "2006:80"
+    links:
+      - db:db
+      - redis:redis
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+      - PHP_IDE_CONFIG="serverName=localhost"
+
+volumes:
+  pimcore-database:
